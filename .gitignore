@@ -136,3 +136,5 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 .idea/vcs.xml
+/tracker/migrations/
+/tracker/__pycache__

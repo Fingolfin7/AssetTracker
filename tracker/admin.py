@@ -3,13 +3,17 @@ from django.contrib.auth.models import Group
 from .models import (
     Department,
     Employee,
-    Laptop
+    Laptop,
+    Supplier,
+    Issues
 )
 
 # register Profile
 admin.site.register(Employee)
 admin.site.register(Department)
 admin.site.register(Laptop)
+admin.site.register(Supplier)
+admin.site.register(Issues)
 
 admin.site.site_header = 'Bakertilly Asset Tracker'
 admin.site.site_title = 'Bakertilly Asset Tracker'
