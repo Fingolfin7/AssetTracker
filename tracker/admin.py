@@ -5,7 +5,7 @@ from .models import (
     Employee,
     Laptop,
     Supplier,
-    Issues
+    Issue
 )
 
 # register Profile
@@ -13,11 +13,11 @@ admin.site.register(Employee)
 admin.site.register(Department)
 admin.site.register(Laptop)
 admin.site.register(Supplier)
-admin.site.register(Issues)
+admin.site.register(Issue)
 
 admin.site.site_header = 'Bakertilly Asset Tracker'
 admin.site.site_title = 'Bakertilly Asset Tracker'
 admin.site.index_title = 'Admin'
 
 # the reference: https://stackoverflow.com/questions/13229235/django-admin-page-removing-group
-admin.site.unregister(Group)
+# admin.site.unregister(Group)

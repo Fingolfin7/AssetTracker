@@ -28,13 +28,13 @@ class Department(models.Model):
 
 
 class Employee(models.Model):
-    name = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
     office = models.CharField(choices=offices, max_length=100, null=True)
     isManager = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
 
 class Laptop(models.Model):
@@ -64,7 +64,7 @@ class Supplier(models.Model):
     contact_person = models.CharField(max_length=100, null=True)
 
 
-class Issues(models.Model):
+class Issue(models.Model):
     laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
     create_date = models.DateField(auto_now_add=True)
     resolution_date = models.DateField(null=True)

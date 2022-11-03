@@ -1,0 +1,88 @@
+{% extends 'tracker/base.html' %}
+{% block content %}
+ <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+     <h4>Employee Details</h4>
+
+     <div class="flex-row">
+         <label>Username: </label>
+         {{ u_form.username }}
+         {{ u_form.username.errors }}
+    </div>
+     <div class="flex-row">
+         <label>Email: </label>
+         {{ u_form.email }}
+         {{ u_form.email.errors }}
+    </div>
+
+     <div class="flex-row">
+         <label>Department: </label>
+         {{ form.department }}
+         {{ form.department.errors }}
+    </div>
+
+     <div class="flex-row">
+         <label>Office: </label>
+         {{ form.office }}
+         {{ form.office.errors }}
+    </div>
+
+     {% if laptop %}
+        <h4>Laptop Details</h4>
+        {% if laptop.is_qrent %}
+            <p>Qrent</p>
+        {% else %}
+            <p>Baker Tilly</p>
+        {% endif %}
+
+        <table>
+            <tr>
+                <td><b>Model</b></td>
+                <td>{{ laptop.brand_model }}</td>
+            </tr>
+            <tr>
+                <td><b>Serial number</b></td>
+                <td>{{ laptop.serial_number }}</td>
+            </tr>
+            <tr>
+                <td><b>Processor</b></td>
+                <td>{{ laptop.processor }}</td>
+            </tr>
+            <tr>
+                <td><b>Ram</b></td>
+                <td>{{ laptop.ram }} GBs</td>
+            </tr>
+            <tr>
+                <td><b>Ram Type</b></td>
+                <td>{{ laptop.ram_type }}</td>
+            </tr>
+            <tr>
+                <td><b>Expandable To</b></td>
+                <td>{{ laptop.max_ram }} GBs</td>
+            </tr>
+            <tr>
+                <td><b>Storage</b></td>
+                <td>{{ laptop.storage }} GBs</td>
+            </tr>
+            <tr>
+                <td><b>Operating System</b></td>
+                <td>{{ laptop.operating_system }}</td>
+            </tr>
+            <tr>
+                <td><b>Installed Antivirus</b></td>
+                <td>{{ laptop.antivirus }}</td>
+            </tr>
+            <tr>
+                <td><b>Condition</b></td>
+                <td>{{ laptop.condition }}</td>
+            </tr>
+        </table>
+
+     {% endif %}
+    <div class="flex-row"></div>
+    <input type="submit" class="form" value="Update">
+ </form>
+
+
+
+{% endblock content %}
