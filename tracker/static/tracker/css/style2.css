@@ -48,6 +48,14 @@
   align-items: center;
 }
 
+.row{
+  display: flex;
+  align-items: center;
+}
+.row > *{
+    margin-right: 2rem;
+}
+
 .flex-row.width-90{
   width: 90%;
 }
@@ -125,10 +133,6 @@
   flex-wrap: wrap;
 }
 
-.plain-link{
-  color: var(--link);
-}
-
 .button:hover{
   cursor: pointer;
 }
@@ -146,19 +150,6 @@
   margin-bottom: 16px;
 }
 
-#sub-details{
-  width: 90%;
-}
-
-.sub-details{
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.sub-details >*{
-  margin-left: auto;
-  margin-bottom: 2px;
-}
 
 /*icons*/
 

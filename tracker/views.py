@@ -40,9 +40,14 @@ def profile(request):
         form = EmployeeUpdateForm(instance=request.user.employee)
         u_form = UserUpdateForm(instance=request.user)
 
+    if hasattr(request.user.employee, 'laptop'):  # check if employee has laptop with hasattr; try-except would work too
+        laptop = request.user.employee.laptop
+    else:
+        laptop = False
+
     context = {
         'form': form,
         'u_form': u_form,
-        'laptop': request.user.employee.laptop
+        'laptop':  laptop
     }
     return render(request, 'tracker/profile.html', context)

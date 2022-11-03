@@ -77,10 +77,17 @@
                 <td>{{ laptop.condition }}</td>
             </tr>
         </table>
-
      {% endif %}
-    <div class="flex-row"></div>
-    <input type="submit" class="form" value="Update">
+
+     <div class="flex-row"></div>
+
+     <div class="row">
+         <a href="{% url 'login' %}">
+            <button type="button">Back</button>
+        </a>
+         <input type="submit" class="form" value="Update">
+     </div>
+
  </form>
 
 
