@@ -58,17 +58,34 @@ class Laptop(models.Model):
 
 class Supplier(models.Model):
     name = models.CharField(max_length=100, null=True)
-    address = models.CharField(max_length=100, null=True)
-    phone = models.CharField(max_length=100, null=True)
-    email = models.EmailField(null=True)
-    contact_person = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100, blank=True)
+    phone = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(blank=True)
+    contact_person = models.CharField(max_length=100, blank=True)
+
+    @classmethod
+    def get_supplier_choice_list(cls):
+        flat_list = cls.objects.all().values_list('name', flat=True)
+        choice_list = []
+
+        for value in flat_list:
+            choice_list.append((value, value))
+
+        return choice_list
+
+    def __str__(self):
+        return self.name
 
 
 class Issue(models.Model):
     laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
     create_date = models.DateField(auto_now_add=True)
-    resolution_date = models.DateField(null=True)
+    resolution_date = models.DateField(blank=True, null=True)
     description = models.TextField(null=True)
-    sent_to = models.ForeignKey(Supplier, on_delete=models.SET_NULL, null=True)
+    sent_to = models.CharField(max_length=100, choices=Supplier.get_supplier_choice_list(), blank=True)
     image = models.ImageField(blank=True, max_length=500, upload_to=f'Issues/Images', validators=[
         FileExtensionValidator(allowed_extensions=['jpg', 'png', 'jfif', 'exif', 'gif', 'tiff', 'bmp'])])
+
+    def __str__(self):
+        return f"{self.title} [SN: {self.laptop.serial_number} Created: {self.create_date}]"

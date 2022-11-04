@@ -2,8 +2,10 @@
 {% block content %}
  <form method="post" enctype="multipart/form-data">
      {% csrf_token %}
-     <h4>Employee Details</h4>
+     <h4>{{ title }}</h4>
+     <div class="flex-row"></div>
 
+     <h5>Employee Details</h5>
      <div class="flex-row">
          <label>Username: </label>
          {{ u_form.username }}
@@ -28,7 +30,7 @@
     </div>
 
      {% if laptop %}
-        <h4>Laptop Details</h4>
+        <h5>Laptop Details</h5>
         {% if laptop.is_qrent %}
             <p>Qrent</p>
         {% else %}
@@ -78,11 +80,56 @@
             </tr>
         </table>
      {% endif %}
+     <div class="flex-row"></div>
+
+     {% if laptop %}
+        <h5>Issue History</h5>
+        <div class="flex-row"></div>
+
+        <a href="{% url 'add-issue' laptop.id %}">
+            <button type="button">Add Issue</button>
+        </a>
+
+        <div class="flex-row"></div>
+
+        {% if issues_list %}
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Create Date</th>
+                    <th>Resolve Date</th>
+                    <th>Sent To</th>
+                </tr>
+                {% for issue in issues_list %}
+                    <tr>
+                        <td>
+                            <a class="plain-link" href="{% url 'update-issue' laptop.id issue.id %}">
+                                {{ issue.title }}
+                            </a>
+                        </td>
+                        <td>{{ issue.create_date }}</td>
+                        {% if issue.resolution_date %}
+                            <td>{{ issue.resolution_date }}</td>
+                        {% else %}
+                            <td>Not Resolved</td>
+                        {% endif %}
+                        <td>
+                            {% if issue.sent_to %}
+                                {{ issue.sent_to }}
+                            {% else %}
+                                IT Department
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+     {% endif %}
 
      <div class="flex-row"></div>
 
      <div class="row">
-         <a href="{% url 'login' %}">
+         <a href="{% url 'profile' %}">
             <button type="button">Back</button>
         </a>
          <input type="submit" class="form" value="Update">

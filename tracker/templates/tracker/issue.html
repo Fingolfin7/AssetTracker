@@ -1,0 +1,35 @@
+{% extends 'tracker/base.html' %}
+{% block content %}
+ <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+     <h4>{{ title }}</h4>
+     <div class="flex-row"></div>
+
+     <div>
+         {{ form.title }}
+         {{ form.title.errors }}
+    </div>
+     <div>
+         {{ form.description }}
+         {{ form.description.errors }}
+    </div>
+
+     <div>
+         <label>Image: </label>
+         {{ form.image }}
+         {{ form.image.errors }}
+    </div>
+
+     <div class="flex-row"></div>
+
+     <div class="row">
+         <a href="{% url 'profile' %}">
+            <button type="button">Back</button>
+        </a>
+         {% if not form.instance.resolution_date %}
+            <input type="submit" class="form" value="Submit">
+         {% endif %}
+     </div>
+
+ </form>
+{% endblock content %}

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Employee, Department, offices, Issue
+from .models import Employee, Department, offices, Issue, Laptop
 
 
 class UserRegisterForm(UserCreationForm):
@@ -40,8 +40,12 @@ class EmployeeUpdateForm(forms.ModelForm):
         }
 
 
-class NewIssueForm(forms.ModelForm):
+class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ['description', 'image']
+        fields = ['title', 'description', 'image']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Title'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Describe the problem.'})
+        }
 
